@@ -8,12 +8,11 @@ billable cores per hour.
 from datetime import timedelta
 from collections import defaultdict
 import pandas as pd
-# import pytz
 
 
 def analyze_vm_activity(inputfile):
     """
-    Analyze VM activity to show which hostnames have active guests per hour in August 2024.
+    Analyze VM activity to show which hostnames have active guests per hour in a month.
     Args:
         inputfile (str): Path to the CSV file containing VM data
         output_file (str, optional): Path to save the output CSV file
@@ -142,10 +141,10 @@ def save_detailed_csv(results, inputfile):
 
 
 if __name__ == "__main__":
-    # Replace 'your_data.csv' with the path to your actual data file
-    inputfile = "./test_data.tsv"
+    # Replace 'data.tsv' with the path to your actual data file
+    inputfile = "./data.tsv"
 
-    print("Starting VM activity analysis for August 2024...")
+    print("Starting VM activity analysis")
 
     # Analyze the data
     results = analyze_vm_activity(inputfile)
