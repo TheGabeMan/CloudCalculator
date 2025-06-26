@@ -8,6 +8,7 @@ billable cores per hour.
 from datetime import timedelta
 from collections import defaultdict
 import pandas as pd
+import os
 
 
 def analyze_vm_activity(inputfile):
@@ -142,8 +143,28 @@ def save_detailed_csv(results, inputfile):
 
 if __name__ == "__main__":
     # Replace 'data.tsv' with the path to your actual data file
-    inputfile = "./data.tsv"
+    # inputfile = "./data.tsv"
+    # Scan current directory for .tsv files
+    tsv_files = [f for f in os.listdir('.') if f.endswith('.tsv')]
 
+    if not tsv_files:
+        print("No .tsv files found in the current directory.")
+        exit(1)
+
+    print("Select a .tsv file to analyze:")
+    for idx, fname in enumerate(tsv_files, 1):
+        print(f"{idx}: {fname}")
+
+    while True:
+        try:
+            choice = int(input("Enter the number of the file: "))
+            if 1 <= choice <= len(tsv_files):
+                inputfile = tsv_files[choice - 1]
+                break
+            else:
+                print("Invalid selection. Try again.")
+        except ValueError:
+            print("Please enter a valid number.")
     print("Starting VM activity analysis")
 
     # Analyze the data
